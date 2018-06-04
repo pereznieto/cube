@@ -1,0 +1,34 @@
+// Settings
+$global-radius: 3px !default;
+$global-transition: all 300ms ease-in-out !default;
+$global-font-size: 14px !default;
+$primary-shadow: 0 4px 3px rgba(69, 76, 80, .25) !default;
+
+// Main colours
+$primary-white: rgb(255, 255, 255);
+$primary-grey: rgb(123, 123, 123);
+$primary-black: rgb(30, 30, 30);
+$primary-background: lightblue;
+$primary: blue;
+$secondary: green;
+$tertiary: orange;
+
+// Cube colours
+$cube-white: white;
+$cube-yellow: yellow;
+$cube-red: red;
+$cube-orange: orange;
+$cube-blue: blue;
+$cube-green: green;
+
+// Breakpoints
+$breakpoints: (
+  'xs':  rem-calc(340px),
+  'sm':  rem-calc(576px),
+  'md':  rem-calc(768px),
+  'lg':  rem-calc(992px),
+  'xl':  rem-calc(1200px),
+);
+
+// Dimensions
+$container-width: 1180px;
