@@ -1,4 +1,9 @@
-.calc-pension-pot {
+body {
+  margin: 0;
+  padding: 0;
+}
+
+.cube-app {
   box-sizing: border-box;
 
   *,
@@ -7,7 +12,6 @@
     box-sizing: inherit;
   }
 
-  body,
   h1,
   h2,
   h3,
@@ -32,6 +36,10 @@
   li > ol,
   li > ul {
     margin-bottom: 0;
+  }
+
+  li {
+    list-style-type: none;
   }
 
   table {

@@ -1,0 +1,26 @@
+@import '../../styles/main';
+
+.timer {
+  margin: 30px;
+  color: $primary;
+  font-size: 180px;
+  font-family: $timer-font;
+
+  .tenths,
+  .minutes,
+  .hundredths {
+    font-size: 140px;
+  }
+
+  &.running {
+    color: rgba($primary, .7);
+
+    .seconds {
+      color: $primary;
+    }
+
+    .hundredths {
+      display: none;
+    }
+  }
+}

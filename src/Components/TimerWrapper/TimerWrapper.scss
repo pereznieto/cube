@@ -1,0 +1,29 @@
+@import '../../styles/main';
+
+.timer-wrapper {
+  .button--start-stop {
+    margin: 30px 0;
+    padding: 10px 30px;
+    border-radius: $global-radius;
+    font-size: 20px;
+  }
+
+  .previous-times {
+    max-width: 150px;
+    margin: 0 auto;
+    text-align: left;
+  }
+
+  .previous-times__index {
+    color: $primary-grey;
+  }
+
+  .previous-times__time,
+  .previous-times__average {
+    font-size: 20px;
+  }
+
+  .previous-times__average-title {
+    margin-top: 20px;
+  }
+}

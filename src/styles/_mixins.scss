@@ -1,3 +1,12 @@
+@function width($key) {
+  @if map-has-key($breakpoints, $key) {
+    @return map-get($breakpoints, $key);
+  }
+
+  @warn 'Unknown `#{$key}` in $breakpoints.';
+  @return null;
+}
+
 @mixin min($breakpoint) { 
   @if map-has-key($breakpoints, $breakpoint) {
     @media (min-width: #{map-get($breakpoints, $breakpoint)}) {
