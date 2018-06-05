@@ -5,6 +5,8 @@ import styles from './Timer.scss';
 
 interface Props {
   isRunning: boolean;
+  isLoading: boolean;
+  isReady: boolean;
   callback?: (count: number) => void;
 }
 
@@ -48,12 +50,18 @@ class Timer extends Component<Props, State> {
   }
 
   render() {
-    const { isRunning } = this.props;
+    const { isRunning, isLoading, isReady } = this.props;
     const { count } = this.state;
     const [minutes, seconds, tenths, hundredths] = (isRunning || count > 0) ? formatTime(count) : [0, '00', 0, 0];
 
     return (
-      <div className={cx(styles['timer'], { [`${styles['running']}`]: isRunning })} >
+      <div
+        className={cx(styles['timer'], {
+          [`${styles['running']}`]: isRunning,
+          [`${styles['loading']}`]: isLoading,
+          [`${styles['ready']}`]: isReady,
+        })}
+      >
         <p className={styles['time']}>
           {minutes ? <span className={styles['minutes']}>{minutes}:</span> : null}
           <span className={styles['seconds']}>{seconds}</span>

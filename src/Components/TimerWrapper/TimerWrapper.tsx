@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
+import cx from 'classnames';
 import Timer from '../Timer';
-import { prettifyTime, average } from '../../utilities/formatters';
+import { prettifyTime, average, getScramble } from '../../utilities/formatters';
 import styles from './TimerWrapper.scss';
 
 interface Props {}
@@ -8,6 +9,8 @@ interface Props {}
 interface State {
   shouldTimerRun: boolean;
   previousTimes: number[];
+  isLoading: boolean;
+  isReady: boolean;
 }
 
 class TimerWrapper extends Component<Props, State> {
@@ -16,38 +19,111 @@ class TimerWrapper extends Component<Props, State> {
     this.state = {
       shouldTimerRun: false,
       previousTimes: [],
+      isLoading: false,
+      isReady: false,
     };
+    this._loadAndReady = this._loadAndReady.bind(this);
+    this._runner = this._runner.bind(this);
   }
 
+  componentWillMount() {
+    window.addEventListener('keydown', this._loadAndReady);
+    window.addEventListener('keyup', this._runner);
+  }
+
+  componentWillUnmount() {
+    window.removeEventListener('keydown', this._loadAndReady);
+    window.removeEventListener('keyup', this._runner);
+  }
+
+  private _loadAndReady = (event: any) => {
+    if (event.which === 32) {
+      event.preventDefault();
+
+      if (this.state.shouldTimerRun) {
+        this.setState({
+          shouldTimerRun: false,
+          isLoading: false,
+          isReady: false,
+        });
+      } else if (!this.state.isLoading) {
+        this.setState({ isLoading: true });
+
+        if (this.loadingTimeout) {
+          clearTimeout(this.loadingTimeout);
+        }
+
+        this.loadingTimeout = setTimeout(() => { this.setState({ isReady: true, isLoading: false }); }, 800);
+      }
+    }
+  }
+
+  private _runner = (event: any) => {
+    if (event.which === 32) {
+      event.preventDefault();
+
+      if (this.state.isReady) {
+        this.setState({ shouldTimerRun: true, isReady: false });
+      } else {
+        this.setState({ isLoading: false });
+      }
+    }
+  }
+
+  private loadingTimeout: NodeJS.Timer;
+
   render() {
-    const { shouldTimerRun, previousTimes } = this.state;
+    const { shouldTimerRun, isLoading, isReady, previousTimes } = this.state;
+    const getSpaceMessage = () => {
+      const startOrStop = shouldTimerRun ? 'stop' : 'start';
+
+      if (!shouldTimerRun && isReady) {
+        return `Release to ${startOrStop}`;
+      }
+
+      if (!shouldTimerRun && !isReady && isLoading) {
+        return 'Hold';
+      }
+
+      if (shouldTimerRun) {
+        return `Press space to ${startOrStop}`;
+      }
+
+      return `Press space to ${startOrStop}`;
+    };
 
     return (
-      <div className={styles['timer-wrapper']} >
+      <div
+        className={cx(styles['timer-wrapper'], {
+          [`${styles['running']}`]: shouldTimerRun,
+          [`${styles['loading']}`]: isLoading,
+          [`${styles['ready']}`]: isReady,
+        })}
+      >
         <Timer
           isRunning={shouldTimerRun}
+          isLoading={isLoading}
+          isReady={isReady}
           callback={(count: number) => { this.setState({ previousTimes: [count, ...previousTimes] }); }}
         />
-        <button
-          onClick={() => {
-            this.setState({ shouldTimerRun: !shouldTimerRun });
-          }}
-          className={styles['button--start-stop']}
-        >
-          {shouldTimerRun ? 'Stop' : 'Start'}
-        </button>
-        {previousTimes.length > 0 &&
-          <div className={styles['previous-times']}>
-            <h3 className={styles['previous-times__title']}>Previous times:</h3>
-            <ul className={styles['previous-times__list']}>
-              {previousTimes.map((time: number, index) =>
-                <li className={styles['previous-times__item']} key={`${index}-${time}`}>
-                  <span className={styles['previous-times__index']}>{previousTimes.length - index}. </span>
-                  <span className={styles['previous-times__time']}>{prettifyTime(time)}</span>
-                </li>)}
-            </ul>
-            <h3 className={styles['previous-times__average-title']}>Average:</h3>
-            <div className={styles['previous-times__average']}>{prettifyTime(average(previousTimes))}</div>
+        <p className={styles['space-message']}>{getSpaceMessage()}</p>
+        {!shouldTimerRun && !isLoading && !isReady && <div className={styles['scramble']}>{getScramble(20)}</div>}
+        {!shouldTimerRun && previousTimes.length > 0 &&
+          <div className={cx(styles['previous-times'], styles['grid'], styles['md-up'])}>
+            <div className={cx(styles['cell'], styles['previous-times__average__wrapper'])}>
+              <h3 className={styles['previous-times__title']}>Average:</h3>
+              <div className={styles['previous-times__average']}>{prettifyTime(average(previousTimes))}</div>
+            </div>
+            <div className={styles['cell']}>
+              <h3 className={styles['previous-times__title']}>Solves:</h3>
+              <ul className={styles['previous-times__list']}>
+                {previousTimes.map((time: number, index) =>
+                  <li className={styles['previous-times__item']} key={`${index}-${time}`}>
+                    <span className={styles['previous-times__index']}>{previousTimes.length - index}. </span>
+                    <span className={styles['previous-times__time']} data-milliseconds={time}>{prettifyTime(time)}</span>
+                  </li>)}
+              </ul>
+            </div>
           </div>
         }
       </div>

@@ -1,6 +1,6 @@
 // Settings
 $global-radius: 3px !default;
-$global-transition: all 300ms ease-in-out !default;
+$global-transition: 150ms ease-in-out !default;
 $global-font-size: 14px !default;
 $primary-shadow: 0 4px 3px rgba(69, 76, 80, .25) !default;
 
@@ -12,10 +12,10 @@ $timer-font: Helvetica, Arial, sans-serif;
 $primary-white: rgb(255, 255, 255);
 $primary-grey: rgb(123, 123, 123);
 $primary-black: rgb(30, 30, 30);
-$primary-background: lightblue;
 $primary: rgb(0, 166, 166);
-$secondary: rgb(205, 83, 52);
-$tertiary: rgb(239, 160, 11);
+$secondary: rgb(103, 148, 64);
+$tertiary: rgb(205, 83, 52);
+$quarterly: rgb(239, 160, 11);
 
 // Cube colours
 $cube-white: white;

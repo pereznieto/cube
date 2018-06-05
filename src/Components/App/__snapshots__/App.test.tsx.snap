@@ -20,9 +20,6 @@ ShallowWrapper {
       "children": <div
         className={undefined}
       >
-        <h1>
-          Rubik's Cube Timer
-        </h1>
         <TimerWrapper />
       </div>,
       "className": undefined,
@@ -33,37 +30,19 @@ ShallowWrapper {
       "key": undefined,
       "nodeType": "host",
       "props": Object {
-        "children": Array [
-          <h1>
-            Rubik's Cube Timer
-          </h1>,
-          <TimerWrapper />,
-        ],
+        "children": <TimerWrapper />,
         "className": undefined,
       },
       "ref": null,
-      "rendered": Array [
-        Object {
-          "instance": null,
-          "key": undefined,
-          "nodeType": "host",
-          "props": Object {
-            "children": "Rubik's Cube Timer",
-          },
-          "ref": null,
-          "rendered": "Rubik's Cube Timer",
-          "type": "h1",
-        },
-        Object {
-          "instance": null,
-          "key": undefined,
-          "nodeType": "class",
-          "props": Object {},
-          "ref": null,
-          "rendered": null,
-          "type": [Function],
-        },
-      ],
+      "rendered": Object {
+        "instance": null,
+        "key": undefined,
+        "nodeType": "class",
+        "props": Object {},
+        "ref": null,
+        "rendered": null,
+        "type": [Function],
+      },
       "type": "div",
     },
     "type": "div",
@@ -77,9 +56,6 @@ ShallowWrapper {
         "children": <div
           className={undefined}
         >
-          <h1>
-            Rubik's Cube Timer
-          </h1>
           <TimerWrapper />
         </div>,
         "className": undefined,
@@ -90,37 +66,19 @@ ShallowWrapper {
         "key": undefined,
         "nodeType": "host",
         "props": Object {
-          "children": Array [
-            <h1>
-              Rubik's Cube Timer
-            </h1>,
-            <TimerWrapper />,
-          ],
+          "children": <TimerWrapper />,
           "className": undefined,
         },
         "ref": null,
-        "rendered": Array [
-          Object {
-            "instance": null,
-            "key": undefined,
-            "nodeType": "host",
-            "props": Object {
-              "children": "Rubik's Cube Timer",
-            },
-            "ref": null,
-            "rendered": "Rubik's Cube Timer",
-            "type": "h1",
-          },
-          Object {
-            "instance": null,
-            "key": undefined,
-            "nodeType": "class",
-            "props": Object {},
-            "ref": null,
-            "rendered": null,
-            "type": [Function],
-          },
-        ],
+        "rendered": Object {
+          "instance": null,
+          "key": undefined,
+          "nodeType": "class",
+          "props": Object {},
+          "ref": null,
+          "rendered": null,
+          "type": [Function],
+        },
         "type": "div",
       },
       "type": "div",

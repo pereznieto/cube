@@ -4,6 +4,8 @@ import Timer from './Timer';
 
 const props = {
   isRunning: true,
+  isLoading: true,
+  isReady: true,
 };
 
 describe('Timer', () => {

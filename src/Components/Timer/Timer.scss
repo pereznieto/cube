@@ -1,10 +1,11 @@
 @import '../../styles/main';
 
 .timer {
-  margin: 30px;
+  margin: 250px 0 0;
   color: $primary;
   font-size: 180px;
   font-family: $timer-font;
+  transition: color $global-transition;
 
   .tenths,
   .minutes,
@@ -12,8 +13,18 @@
     font-size: 140px;
   }
 
+  &.loading {
+    color: $tertiary;
+  }
+
+  &.ready {
+    color: $secondary;
+  }
+
   &.running {
+    margin: 180px 0 0;
     color: rgba($primary, .7);
+    font-size: 300px;
 
     .seconds {
       color: $primary;

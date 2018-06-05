@@ -1,29 +1,64 @@
 @import '../../styles/main';
 
 .timer-wrapper {
-  .button--start-stop {
+  &.ready {
+    .space-message {
+      color: $secondary;
+    }
+  }
+
+  &.running {
+    color: $primary-grey;
+
+    .space-message {
+      color: $tertiary;
+    }
+  }
+
+  .space-message {
     margin: 30px 0;
-    padding: 10px 30px;
-    border-radius: $global-radius;
-    font-size: 20px;
+    font-weight: 700;
+    font-size: 30px;
+    transition: all $global-transition;
+  }
+
+  .scramble {
+    margin-top: 100px;
+    color: $primary-grey;
+    font-size: 35px;
   }
 
   .previous-times {
-    max-width: 150px;
-    margin: 0 auto;
+    max-width: 400px;
+    margin: 100px auto 0;
     text-align: left;
+    transition: all $global-transition;
+
+    > div {
+      padding: 0 20px;
+    }
+  }
+
+  .previous-times__average__wrapper {
+    text-align: center;
+  }
+
+  .previous-times__title {
+    margin-bottom: 10px;
+    font-weight: 400;
+    font-size: 28px;
   }
 
   .previous-times__index {
     color: $primary-grey;
   }
 
-  .previous-times__time,
-  .previous-times__average {
+  .previous-times__time {
     font-size: 20px;
   }
 
-  .previous-times__average-title {
-    margin-top: 20px;
+  .previous-times__average {
+    color: $primary;
+    font-size: 28px;
   }
 }
