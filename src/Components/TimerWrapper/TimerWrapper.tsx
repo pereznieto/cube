@@ -1,7 +1,13 @@
 import React, { Component } from 'react';
 import cx from 'classnames';
 import Timer from '../Timer';
-import { prettifyTime, average, getScramble } from '../../utilities/formatters';
+import {
+  prettifyTime,
+  average,
+  getScramble,
+  getMin,
+  getMax,
+} from '../../utilities/formatters';
 import styles from './TimerWrapper.scss';
 
 interface Props {}
@@ -46,7 +52,7 @@ class TimerWrapper extends Component<Props, State> {
           isLoading: false,
           isReady: false,
         });
-      } else if (!this.state.isLoading) {
+      } else if (!this.state.isLoading && !this.state.isReady) {
         this.setState({ isLoading: true });
 
         if (this.loadingTimeout) {
@@ -61,6 +67,10 @@ class TimerWrapper extends Component<Props, State> {
   private _runner = (event: any) => {
     if (event.which === 32) {
       event.preventDefault();
+
+      if (this.loadingTimeout) {
+        clearTimeout(this.loadingTimeout);
+      }
 
       if (this.state.isReady) {
         this.setState({ shouldTimerRun: true, isReady: false });
@@ -115,12 +125,20 @@ class TimerWrapper extends Component<Props, State> {
               <div className={styles['previous-times__average']}>{prettifyTime(average(previousTimes))}</div>
             </div>
             <div className={styles['cell']}>
-              <h3 className={styles['previous-times__title']}>Solves:</h3>
+              <h3 className={styles['previous-times__title']}>Times:</h3>
               <ul className={styles['previous-times__list']}>
                 {previousTimes.map((time: number, index) =>
                   <li className={styles['previous-times__item']} key={`${index}-${time}`}>
                     <span className={styles['previous-times__index']}>{previousTimes.length - index}. </span>
-                    <span className={styles['previous-times__time']} data-milliseconds={time}>{prettifyTime(time)}</span>
+                    <span
+                      className={cx(styles['previous-times__time'], {
+                        [`${styles['previous-times__time--min']}`]: time === getMin(previousTimes),
+                        [`${styles['previous-times__time--max']}`]: time === getMax(previousTimes),
+                      })}
+                      data-milliseconds={time}
+                    >
+                      {prettifyTime(time)}
+                    </span>
                   </li>)}
               </ul>
             </div>

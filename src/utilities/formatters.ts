@@ -21,7 +21,7 @@ export const average = (times: number[]) => {
 };
 
 export const getScramble = (count: number) => Array(count).fill('').reduce(
-  (previous, current, index) => {
+  (prev, curr, index) => {
     const moves = [
       'R', 'R’', 'R2',
       'L', 'L’', 'L2',
@@ -39,9 +39,13 @@ export const getScramble = (count: number) => Array(count).fill('').reduce(
       'F', 'F’', 'F2',
     ];
     const randomIndex = Math.floor(Math.random() * 18);
-    const previousItem = index === 0 ? previous[0] : previous[index];
-    const differentSide = moves[randomIndex].split('')[0] !== previousItem.split('')[0];
+    const prevItem = index === 0 ? prev[0] : prev[index];
+    const differentSide = moves[randomIndex].split('')[0] !== prevItem.split('')[0];
 
-    return differentSide ? [...previous, moves[randomIndex]] : [...previous, moves_i[randomIndex]];
+    return differentSide ? [...prev, moves[randomIndex]] : [...prev, moves_i[randomIndex]];
   },
   ['']).join(' ');
+
+export const getMin = (times: number[]) => times.reduce((prev, curr) => prev < curr ? prev : curr);
+
+export const getMax = (times: number[]) => times.reduce((prev, curr) => prev > curr ? prev : curr);

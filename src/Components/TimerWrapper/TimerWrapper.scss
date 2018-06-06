@@ -57,8 +57,17 @@
     font-size: 20px;
   }
 
+
+  .previous-times__time--max {
+    color: $tertiary;
+  }
+
+  .previous-times__time--min {
+    color: $secondary;
+  }
+
   .previous-times__average {
     color: $primary;
-    font-size: 28px;
+    font-size: 40px;
   }
 }

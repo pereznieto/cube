@@ -8,7 +8,7 @@ describe('TimerWrapper', () => {
   });
 
   it('should render TimerWrapper as expected', () => {
-    const component = shallow(<TimerWrapper />);
+    const component = <TimerWrapper />;
     expect(component).toMatchSnapshot();
   });
 });

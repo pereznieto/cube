@@ -25,14 +25,15 @@ class Timer extends Component<Props, State> {
   private interval: NodeJS.Timer;
 
   componentDidUpdate(prevProps: Props, prevState: State) {
-    const { isRunning, callback } = this.props;
+    const { isRunning, isReady, callback } = this.props;
     const { count } = this.state;
+
+    if ((prevProps.isReady !== isReady) && isReady) {
+      this.setState({ count: 0 });
+    }
 
     if (prevProps.isRunning !== isRunning) {
       if (isRunning) {
-        if (count > 0) {
-          this.setState({ count: 0 });
-        }
         this.interval = setInterval(() => this._tick(), 10);
       } else {
         clearInterval(this.interval);
