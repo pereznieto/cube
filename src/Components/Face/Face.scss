@@ -1,0 +1,52 @@
+@import '../../styles/main';
+
+.face {
+  $length: 50px;
+
+  position: absolute;
+  top: 50px;
+  left: 50%;
+  width: ($length * 3);
+  height: ($length * 3);
+  transform: translateX(-50%);
+
+  .sticker {
+    position: absolute;
+    box-sizing: border-box;
+    width: $length;
+    height: $length;
+    border: 4px solid $primary-black;
+    border-radius: 5px;
+    background-color: $primary-white;
+
+    &--top {
+      top: 0;
+    }
+
+    &--middle {
+      top: $length;
+    }
+
+    &--bottom {
+      top: ($length * 2);
+    }
+
+    &--left {
+      left: 0;
+    }
+
+    &--centre {
+      left: $length;
+    }
+
+    &--right {
+      left: ($length * 2);
+    }
+
+    @each $colour, $value in $cube-colors {
+      &.sticker--#{$colour} {
+        background-color: $value;
+      }
+    }
+  }
+}

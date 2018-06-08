@@ -1,3 +1,5 @@
+import { Colour } from '../Components/Face';
+
 export const formatTime = (time: number) => {
   const splitTime = String(time).split('');
   const hundredths = splitTime[splitTime.length - 1] || 0;
@@ -18,6 +20,11 @@ export const prettifyTime = (time: number) => {
 export const average = (times: number[]) => {
   const sum = times.reduce((previous: number, current: number) => previous + current, 0);
   return Math.round(sum / times.length);
+};
+
+export const getRandomColour = () => {
+  const colours = [Colour.W, Colour.Y, Colour.R, Colour.O, Colour.B, Colour.G];
+  return colours[Math.floor(Math.random() * 6)];
 };
 
 export const getScramble = (count: number) => Array(count).fill('').reduce(

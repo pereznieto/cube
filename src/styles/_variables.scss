@@ -17,15 +17,15 @@ $secondary: rgb(103, 148, 64);
 $tertiary: rgb(205, 83, 52);
 $quarterly: rgb(239, 160, 11);
 
-// Cube colours
-$cube-white: white;
-$cube-yellow: yellow;
-$cube-red: red;
-$cube-orange: orange;
-$cube-blue: blue;
-$cube-green: green;
+$cube-colors: (
+  'white': #fff,
+  'yellow': #ffd500,
+  'red': #c41e3a,
+  'orange': #ff5800,
+  'blue': #0051ba,
+  'green': #009e60,
+);
 
-// Breakpoints
 $breakpoints: (
   'xs':  340px,
   'sm':  576px,

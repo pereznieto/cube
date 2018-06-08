@@ -1,9 +1,11 @@
 import React, { Component } from 'react';
 import cx from 'classnames';
+import Face from '../Face';
 import Timer from '../Timer';
 import {
   prettifyTime,
   average,
+  getRandomColour,
   getScramble,
   getMin,
   getMax,
@@ -102,6 +104,12 @@ class TimerWrapper extends Component<Props, State> {
       return `Press space to ${startOrStop}`;
     };
 
+    const cubeColours = isReady ? [
+      [getRandomColour(), getRandomColour(), getRandomColour()],
+      [getRandomColour(), getRandomColour(), getRandomColour()],
+      [getRandomColour(), getRandomColour(), getRandomColour()],
+    ] : undefined;
+
     return (
       <div
         className={cx(styles['timer-wrapper'], {
@@ -110,6 +118,7 @@ class TimerWrapper extends Component<Props, State> {
           [`${styles['ready']}`]: isReady,
         })}
       >
+        <Face colourAllocations={cubeColours} shouldRandomise={shouldTimerRun} />
         <Timer
           isRunning={shouldTimerRun}
           isLoading={isLoading}
