@@ -1,3 +1,4 @@
+import { includes } from 'lodash';
 import { Colour } from '../Components/Face';
 
 export const formatTime = (time: number) => {
@@ -38,18 +39,28 @@ export const getScramble = (count: number) => Array(count).fill('').reduce(
       'B', 'B’', 'B2',
     ];
     const moves_i = [
-      'L', 'L’', 'L2',
-      'R', 'R’', 'R2',
-      'D', 'D’', 'D2',
-      'U', 'U’', 'U2',
-      'B', 'B’', 'B2',
       'F', 'F’', 'F2',
+      'B', 'B’', 'B2',
+      'R', 'R’', 'R2',
+      'L', 'L’', 'L2',
+      'U', 'U’', 'U2',
+      'D', 'D’', 'D2',
     ];
+    const moves_not = {
+      R: ['R', 'L'],
+      L: ['R', 'L'],
+      U: ['U', 'D'],
+      D: ['U', 'D'],
+      F: ['F', 'B'],
+      B: ['F', 'B'],
+    };
     const randomIndex = Math.floor(Math.random() * 18);
     const prevItem = index === 0 ? prev[0] : prev[index];
-    const differentSide = moves[randomIndex].split('')[0] !== prevItem.split('')[0];
+    const prevInitial = prevItem.split('')[0];
+    const currInitial = moves[randomIndex].split('')[0];
+    const shouldInverse = includes(moves_not[currInitial], prevInitial);
 
-    return differentSide ? [...prev, moves[randomIndex]] : [...prev, moves_i[randomIndex]];
+    return shouldInverse ? [...prev, moves_i[randomIndex]] : [...prev, moves[randomIndex]];
   },
   ['']).join(' ');
 
