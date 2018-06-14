@@ -2,13 +2,18 @@
   "name": "cube",
   "version": "0.1.0",
   "private": false,
-  "homepage": "https://github.com/pereznieto/cube#cube-timer",
+  "homepage": "http://ma.cias.pro/cube",
+  "repository" : {
+    "type" : "git",
+    "url" : "https://github.com/npm/npm.git"
+  },
   "scripts": {
     "start": "node scripts/start.js",
     "build": "node scripts/build.js",
     "lint": "tslint -p ./tsconfig.json -c ./tslint.json 'src/**/*.+(js|ts|tsx)'",
     "serve": "serve -s build",
-    "test": "node scripts/test.js --env=jsdom"
+    "test": "node scripts/test.js --env=jsdom",
+    "deploy": "npm run build && scp -r build/* macias@ma.cias.pro:/home/macias/ma.cias.pro/cube"
   },
   "dependencies": {
     "autoprefixer": "7.1.6",
